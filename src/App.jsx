@@ -1,18 +1,23 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { useEffect, useState } from 'react'
+
 import './App.css'
 
 function App() {
   const[count, setCount]=useState(0);
 
   const[posts,setPosts]=useState([]);
-  fetch("https://jsonplaceholder.typicode.com/posts")
+  useEffect(()=>{
+    fetch("https://jsonplaceholder.typicode.com/posts")
          .then((res)=>res.json())
-         .then((data)=>{setPosts(data)})
+         .then((data)=>{
+                setPosts(data);
+                return;
+         })
          .catch((error)=>{
           console.log("error 404")
          })
+  },[])
+  
 
   return (
     <>
